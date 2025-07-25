@@ -1,11 +1,12 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css'
 import MainLayout from './components/Layout/MainLayout';
-import About from "./Pages/About";
+import Cards from "./Pages/Cards";
 import Home from "./Pages/Home";
 import Contact from "./Pages/Contact";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import CardDetails from './Pages/CardDetails';
 
 const router = createBrowserRouter([
   {
@@ -14,13 +15,18 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       {
-        path: "/about",
-        element: <About />
+        path: "/cards",
+        element: <Cards />
       },
       {
         path: "/contact",
         element: <Contact />
-      }
+      },
+      {
+        path: "/cards/:id",
+        element: <CardDetails />
+      },
+
     ],
   },
 ]);

@@ -13,12 +13,12 @@ const Header = () => {
           Home
         </NavLink>
         <NavLink
-          to="/about"
+          to="/cards"
           className={({ isActive }) =>
             isActive ? 'font-bold underline' : 'hover:underline'
           }
         >
-          About
+          Cards
         </NavLink>
         <NavLink
           to="/contact"
