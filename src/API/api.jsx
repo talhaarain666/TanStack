@@ -35,3 +35,7 @@ export const fetchPostDetails = async (id) => {
 export const deletePost = (id) => {
   return api.delete(`/posts/${id}`);
 };
+
+export const updatePost = (id) => {
+  return api.patch(`/posts/${id}`, { title: "I have updated" });
+};

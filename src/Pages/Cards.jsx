@@ -1,5 +1,5 @@
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deletePost, fetchPosts } from "../API/api";
+import { deletePost, fetchPosts, updatePost } from "../API/api";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
@@ -29,15 +29,30 @@ const Cards = () => {
 
   // FOR DELETE
 
+  // queryClient.setQueryData is used to access cached data
+
   const deleteMutation = useMutation({
-    mutationFn: (id) => deletePost(id), // mutuationFn is required
+    mutationFn: (id) => deletePost(id), // mutuationFn is required (deleted is done here)
     onSuccess: (data, id) => { // in data we can find details like status code etc. id of element
       queryClient.setQueryData(["posts", pageNumber], (currElem) => {   // ["posts", pageNumber] jis query key k cached data ko access krna hai wo likhna hai
         return currElem?.filter((post) => post.id !== id);
 
       })
     }
-  })
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: (id) => updatePost(id),  // here update done
+    // postid is when we pass argument when calling function, apiData is when we pass data while making api in api.jsx
+    onSuccess: (apiData, postid) => { // in data we can find details like status code etc. id of element
+      queryClient.setQueryData(["posts", pageNumber], (postsData) => {
+        return postsData?.map((curPost) => {
+          return curPost.id === postid ? { ...curPost, title: apiData.data.title } : curPost; // only update title of post that match
+        });
+
+      })
+    }
+  });
 
   if (isPending) return <p>Loading...</p>;
   if (isError) return <p>Error:{error.message || "Something went wrong"}</p>
