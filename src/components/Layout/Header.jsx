@@ -28,6 +28,14 @@ const Header = () => {
         >
           Contact
         </NavLink>
+        <NavLink
+          to="/infinite"
+          className={({ isActive }) =>
+            isActive ? 'font-bold underline' : 'hover:underline'
+          }
+        >
+          Infinite Scroll
+        </NavLink>
       </nav>
     </header>
   );

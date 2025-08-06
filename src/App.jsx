@@ -7,6 +7,7 @@ import Contact from "./Pages/Contact";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import CardDetails from './Pages/CardDetails';
+import InfiniteScroll from './Pages/InfiniteScroll.jsx';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/cards/:id",
         element: <CardDetails />
+      },
+      {
+        path: "/infinite",
+        element: <InfiniteScroll />
       },
 
     ],
